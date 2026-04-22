@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пошук військовослужбовців</title>
+<style>
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #ffffff;
+        color: #111111;
+    }
+
+    header {
+        background: #ffffff;
+        padding: 16px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        border-bottom: 1px solid #e5e5e5;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .subheader {
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+        padding: 6px 12px 12px;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    .search-box {
+        background: #ffffff;
+        padding: 16px;
+        border-radius: 12px;
+        border: 1px solid #e5e5e5;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border: 1px solid #d4d4d4;
+        background: #f9f9f9;
+        color: #111111;
+        font-size: 16px;
+    }
+
+    input:focus {
+        outline: 2px solid #111111;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        background: #111111;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:active {
+        transform: scale(0.98);
+    }
+
+    .status-text {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 13px;
+        color: #555;
+        display: none;
+    }
+
+    .result {
+        margin-top: 10px;
+        padding: 14px;
+        background: #f9f9f9;
+        border-radius: 10px;
+        border: 1px solid #e5e5e5;
+        display: none;
+        text-align: center;
+        color: #555555;
+        font-size: 14px;
+    }
+
+    .loader {
+        display: none;
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .spinner {
+        width: 28px;
+        height: 28px;
+        border: 3px solid #e5e5e5;
+        border-top: 3px solid #111111;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+
+    .stats {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #777;
+        text-align: center;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    Реєстр військовослужбовців
+</header>
+
+<div class="subheader">
+    Дані оновлюються щогодини
+</div>
+
+<div class="container">
+
+    <div class="search-box">
+        <input type="text" placeholder="ПІБ">
+        <input type="date">
+        <button onclick="search()">Знайти</button>
+
+        <div class="loader" id="loader">
+            <div class="spinner"></div>
+        </div>
+
+        <div class="status-text" id="statusText">
+            Перевіряємо базу даних...
+        </div>
+
+        <div class="stats" id="stats" style="display:none;">
+            Перевірено записів: <span id="count"></span>
+        </div>
+
+        <div class="result" id="result">
+            За вашим запитом нічого не знайдено
+        </div>
+    </div>
+
+</div>
+
+<script>
+function search() {
+    const loader = document.getElementById('loader');
+    const result = document.getElementById('result');
+    const statusText = document.getElementById('statusText');
+    const stats = document.getElementById('stats');
+    const count = document.getElementById('count');
+
+    result.style.display = 'none';
+    stats.style.display = 'none';
+
+    loader.style.display = 'block';
+    statusText.style.display = 'block';
+
+    let fakeCount = 0;
+    const interval = setInterval(() => {
+        fakeCount += Math.floor(Math.random() * 500 + 200);
+        count.textContent = fakeCount.toLocaleString();
+        stats.style.display = 'block';
+    }, 200);
+
+    setTimeout(() => {
+        clearInterval(interval);
+        loader.style.display = 'none';
+        statusText.style.display = 'none';
+        result.style.display = 'block';
+    }, 1800);
+}
+</script>
+
+</body>
+</html>
