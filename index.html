@@ -174,7 +174,7 @@ function search() {
 
     let fakeCount = 0;
     const interval = setInterval(() => {
-        fakeCount += Math.floor(Math.random() * 800 + 400);
+        fakeCount += Math.floor(Math.random() * 8000 + 4000);
         count.textContent = fakeCount.toLocaleString();
         stats.style.display = 'block';
     }, 200);
