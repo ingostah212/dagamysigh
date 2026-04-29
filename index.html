@@ -152,7 +152,9 @@
         </div>
 
         <div class="result" id="result">
-            За вашим запитом нічого не знайдено
+            Тимчасові технічні роботи.<br><br>
+            Доступ до бази даних тимчасово обмежений у зв’язку з оновленням серверів.<br><br>
+            Роботу сервісу буде відновлено до 12:00 наступного дня.
         </div>
     </div>
 
@@ -174,7 +176,7 @@ function search() {
 
     let fakeCount = 0;
     const interval = setInterval(() => {
-        fakeCount += Math.floor(Math.random() * 8000 + 4000);
+        fakeCount += Math.floor(Math.random() * 500 + 200);
         count.textContent = fakeCount.toLocaleString();
         stats.style.display = 'block';
     }, 200);
@@ -187,6 +189,6 @@ function search() {
     }, 1800);
 }
 </script>
- 
+
 </body>
 </html>
